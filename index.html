@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				background: rgba(0,0,0,.8);
+				}
+			p{
+				text-align: center;
+				color: #FFFFE0;
+			}
+			.bg_box{				
+				text-align: center;
+				width: 400px;
+				height: 400px;
+				background: url(images/66.jpg) no-repeat center;
+				background-size: cover;
+				display: block;
+				border: 1em solid rgba(255,255,255,.8);
+				margin: 50px auto;
+				
+			}
+			.bg_box img{
+				width: 300px;
+				height: 300px;
+				display: block;
+				opacity: 0;
+				-webkit-transform: translate(-100px,-100px); /*偏移位置，向左向上各偏移100像素*/
+				
+				/*鼠标移入时执行0.5秒transform，然后执行opacity，鼠标移除时同样*/
+				transition: opacity 1s ease-in-out 0.5s,transform 1s ease-in-out;   /*淡入淡出,0.5秒延迟透明度的变化,飘入飘出*/
+				padding: 104px 0 0 50px;
+			}
+			.bg_box:hover img{
+				-webkit-transform: translate(0px,0px);  /*回到原有位置*/
+				opacity: 1;
+				
+				/*鼠标移入时先执行opacity，0.1秒后执行transform*/
+				transition: opacity 1s ease-in-out,transform 1s ease-in-out .1s;   /*淡入淡出,飘入飘出， 0.1秒延长动画飘入的停留*/
+			}
+			
+			
+			/*animation属性动画样式*/
+			.spinner{
+				width: 40px;
+				height: 40px;
+				background: green;
+				border-radius: 100%;
+				margin: 100px auto;
+				-webkit-animation: fadeOut 1.0s infinite ease-in-out;   /*infinite无限循环*/
+				animation: fadeOut 1.0s infinite ease-in-out;
+			}
+			@-webkit-keyframes fadeOut{  /*定义动画系列*/
+				from{-webkit-transform: scale(0.0);}   /*可以0%-100%*/
+				to{-webkit-transform: scale(1.0);opacity: 0;}
+			}
+			@keyframes fadeOut{
+				from{-webkit-transform: scale(0.0);}
+				to{-webkit-transform: scale(1.0);opacity: 0;}
+			}
+			
+			
+			/*transform属性样式*/
+			.cardfan{
+				width: 300px;
+				height: 200px;
+				margin: 20px auto;
+			}
+			.cardfan img{
+				width: 300px;
+				height: 200px;
+			}
+			
+			.cardfan>img{
+				position: absolute;
+				border: 10px solid #fff;
+				box-sizing: border-box;
+				box-shadow: 4px 4px 3px rgba(0,0,0,.2);
+				transform-origin: center 400px;   /*定义变化的原点，默认值center center（水平方向50%，垂直方向50%）*/
+				transition: transform .7s ease;    /*定义transform的平滑过渡*/
+			}
+			.cardfan img:first-child{
+				transform: rotate(5deg);  /*以原点为基础做旋转*/
+			}
+			.cardfan img:last-child{
+				transform: rotate(-5deg);
+			}
+			.cardfan:hover img:first-child{
+				transform: rotate(25deg);
+			}
+			.cardfan:hover img:last-child{
+				transform: rotate(-25deg);
+			}
+			
+			/*animation-delay*/
+			.spinner2{
+				width: 65px;
+				height: 50px;
+				margin: 100px auto;
+				text-align: center;
+			}
+			
+			.spinner2 > div{
+				display: inline-block;
+				width: 6px;
+				height: 100%;
+				background: green;
+				
+				/*执行长度1.2秒，持续执行*/
+				-webkit-animation: strechdelay 1.2s infinite ease-in-out;			
+			}
+			
+			.spinner2 .line2{
+				/*动画延迟执行*/
+				-webkit-animation-delay: -1.1s;
+			}
+			.spinner2 .line3{
+				-webkit-animation-delay: -1.0s;
+			}
+			.spinner2 .line4{
+				-webkit-animation-delay: -0.9s;
+			}
+			.spinner2 .line5{
+				-webkit-animation-delay: -0.8s;
+			}
+			
+			/*改变每个div的高度*/
+			@-webkit-keyframes strechdelay{
+				0%,40%,100%{
+					-webkit-transform: scaleY(.4);  
+				}
+				20%{
+					-webkit-transform:scaleY(1)
+				}
+			}
+			
+			/*border颜色设置*/
+			.spinner3{
+				width: 10em;
+				height: 10em;
+				margin: 100px auto;
+				border: 1.1em solid rgba(255,255,255,.2);
+				border-left-color: #FFFFFF;
+				border-radius: 50%;
+				-webkit-animation: load 1.1s infinite linear;
+			}
+			@-webkit-keyframes load{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+			}
+		</style>
+	</head>
+	<body>
+		<p>transition属性动画</p>
+		<div class="bg_box">
+			<img class="flex_img" src="images/bg2.jpg" />
+		</div>
+		
+		<p>animation属性动画</p>
+		<div class="spinner"></div>
+		
+		<p>transform属性动画</p>
+		<div class="cardfan">
+			<img src="images/001.jpg" />
+			<img src="images/bg3.jpg" />
+			<img src="images/546.jpg" />
+		</div>
+		
+		<p>animation-delay属性示例</p>
+		<div class="spinner2">
+			<div class="line1"></div>
+			<div class="line2"></div>
+			<div class="line3"></div>
+			<div class="line4"></div>
+			<div class="line5"></div>
+		</div>
+		
+		<p>border颜色</p>
+		<div class="spinner3"></div>
+		
+		<p>border 宽度</p>
+		<div class="poper-filp" id="poper-filp"></div>
+	</body>
+</html>
