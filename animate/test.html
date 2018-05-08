@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=750,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="animate.css" />
+		 <style>
+    body,
+    p,
+    dl,
+    dd,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .box {
+      width: 600px;
+
+      background-color: #ccc;
+      text-align: center;
+      line-height: 30px;
+      overflow: hidden;
+    }
+
+    .box-con {
+      width: 300px;
+      float: left;
+      text-align: center;
+    }
+
+    .box-show {
+      width: 280px;
+      float: right;
+      margin-right: 20px;
+      position: relative;
+    }
+
+    .box-con-dl {
+      float: left;
+      width: 80%;
+    }
+
+    .bcd-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .bcd-des {
+      background-color: rgba(255, 255, 255, 0.3);
+      margin-left: 2px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .box-show-title {
+      font: bold 20px/50px "宋体";
+    }
+
+    .box-show-main {
+      width: 280px;
+      height: 200px;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 5px;
+      text-align: left;
+      background-color: pink;
+      position: relative;
+    }
+
+    .bsm-main {
+      display: block;
+      background-color: lightblue;
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 140px;
+      height: 30px;
+    }
+
+    .bsm-main-part {
+      display: inline;
+      background-color: lightyellow;
+      border: 1px solid black;
+      margin: 10px;
+    }
+
+    .bsm-aside {
+      display: inline;
+      background-color: lightgreen;
+    }
+  @media (max-width:700px) {
+    .box{width:100%;box-sizing: border-box;}
+    .box-show,.box-con{float:none;overflow: hidden;width:100%;box-sizing: border-box;}
+    .box-show-main{height:100px;}
+    .box-show-main,.box-con-dl{width:100%;box-sizing: border-box;}
+    .bcd-des{float:left;width:18%;margin:1%;box-sizing: border-box;}
+  }      
+  </style>
+</head>
+
+<body>
+
+  <div class="box" id="box">
+    <div class="box-show" id="boxShow">
+      <h2 class="box-show-title">Attention(晃动效果)演示</h2>
+      <div class="box-show-main">
+        <div class="bsm-main">小火柴的蓝色理想</div>
+      </div>
+      <div class="box-show-msg"></div>
+      <button class="box-show-reset" type="button">还原</button>
+    </div>
+    <div class="box-con" id="boxCon">
+      <dl class="box-con-dl" id="control">
+        <dt class="bcd-title">attention</dt>
+      </dl>
+    </div>
+
+  </div>
+  <script>
+    var arr = ['bounce', 'flash', 'pulse', 'rubberBand', 'shake', 'headShake', 'swing', 'tada', 'wobble', 'jello'];
+    var con = document.getElementById('control');
+    var html = '';
+    for (var i = 0; i < arr.length; i++) {
+      html += '<dd class="bcd-des">' + arr[i] + '</dd>';
+    }
+    con.innerHTML += html;
+
+    (function () {
+      var oBoxCon = document.getElementById('boxCon');
+      var oBoxShow = document.getElementById('boxShow');
+      var oBSMMain = oBoxShow.getElementsByClassName('bsm-main')[0];
+      var oBoxShowMsg = oBoxShow.getElementsByClassName('box-show-msg')[0];
+      oBoxCon.onclick = function (e) {
+        e = e || event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == 'DD') {
+          var oTargetParent = target.parentNode;
+          var aTargets = oTargetParent.getElementsByTagName('dd');
+          var sTargetTitle = oTargetParent.getElementsByTagName('dt')[0].innerHTML;
+          var sTargetValue = target.innerHTML;
+          for (var i = 0, len = aTargets.length; i < len; i++) {
+            aTargets[i].style.cssText = 'color: black; background-color: rgba(255,255,255,0.3);';
+          }
+          target.style.cssText = 'color: white; background-color: black;';
+          oBSMMain.className = 'bsm-main animated ' + sTargetValue;
+
+        }
+      }
+      var oBoxShowReset = oBoxShow.getElementsByClassName('box-show-reset')[0];
+      oBoxShowReset.onclick = function () {
+        history.go();
+      }
+
+    })();
+  </script>
+</body>
+</html>
